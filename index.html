@@ -1,15 +1,41 @@
+<!DOCTYPE HTML>
 <html>
-<body>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.2.min.js"></script>
+    <script defer="defer">
+      var stage = new Kinetic.Stage({
+        container: 'container',
+        width: 578,
+        height: 200
+      });
 
-<div class='header'><h1>Home</h1></div>
-<div class='search-view'>
-<input class='search-key' type="text"/>
-<ul class='employee-list'></ul>
-</div>
+      var layer = new Kinetic.Layer();
 
-<script src="lib/jquery-1.8.2.min.js"></script>
-<script src="js/storage/memory-store.js"></script>
-<script src="js/main.js"></script>
+      var wedge = new Kinetic.Wedge({
+        x: stage.width() / 2,
+        y: stage.height() / 2,
+        radius: 70,
+        angle: 60,
+        fill: 'red',
+        stroke: 'black',
+        strokeWidth: 4,
+        rotation: -120
+      });
 
-</body>
+      // add the shape to the layer
+      layer.add(wedge);
+
+      // add the layer to the stage
+      stage.add(layer);
+    </script>
+  </body>
 </html>
