@@ -19,8 +19,21 @@
       });
 
       var layer = new Kinetic.Layer();
+      var background = new Kinetic.Layer();
+      
+    var bgcolor = new Kinetic.Rect({
+        x: 0,
+        y: 0,
+        width: 200,
+        height: 200,
+        fill: 'black',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+      
 
-      var wedge = new Kinetic.Wedge({
+    /*  var wedge = new Kinetic.Wedge({
         x: stage.width() / 2,
         y: stage.height() / 2,
         radius: 70,
@@ -28,13 +41,18 @@
         fill: 'red',
         stroke: 'black',
         strokeWidth: 4,
-        rotation: -120
-      });
+        rotation: -120,
+        shadowColor:'black',
+        shadowBlur:10,
+        shadowOffset:{x:5,y:5},
+        shadowOpacity:0.5
+      });*/
 
       // add the shape to the layer
-      layer.add(wedge);
-
+      //layer.add(wedge);
+	  background.add(bgcolor);
       // add the layer to the stage
+      stage.add(background);
       stage.add(layer);
     </script>
     <script src="js/main.js"></script>
