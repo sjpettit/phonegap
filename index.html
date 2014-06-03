@@ -12,10 +12,11 @@
     <div id="container"></div>
     <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.2.min.js"></script>
     <script defer="defer">
+    var size =  getScreenSizeDPI();
       var stage = new Kinetic.Stage({
         container: 'container',
-        width: 320,
-        height: 533
+        width: size[0],
+        height: size[1]
       });
 
       var layer = new Kinetic.Layer();
@@ -24,37 +25,46 @@
     var bgcolor = new Kinetic.Rect({
         x: 0,
         y: 0,
-        width: 320,
-        height: 533,
+        width: size[0],
+        height: size[1],
         fill: 'black',
-        stroke: 'black',
+        stroke: 'white',
         strokeWidth: 4
       });
       
+      console.log(getScreenSizeDPI());
       
+      
+    function getScreenSizeDPI() {    
+    var temp =  document.createElement("div")
+    temp.style.overflow='hidden';
+    temp.style.visibility='hidden';
+    document.body.appendChild(temp)
+    return [screen.width, screen.height];
+	}
 
-    /*  var wedge = new Kinetic.Wedge({
+     var wedge = new Kinetic.Wedge({
         x: stage.width() / 2,
         y: stage.height() / 2,
         radius: 70,
         angle: 60,
         fill: 'red',
-        stroke: 'black',
+        stroke: 'red',
         strokeWidth: 4,
         rotation: -120,
-        shadowColor:'black',
+        shadowColor:'white',
         shadowBlur:10,
         shadowOffset:{x:5,y:5},
         shadowOpacity:0.5
-      });*/
+      });
 
       // add the shape to the layer
-      //layer.add(wedge);
+      layer.add(wedge);
 	  background.add(bgcolor);
       // add the layer to the stage
       stage.add(background);
       stage.add(layer);
     </script>
-    <script src="js/main.js"></script>
+    <!--<script src="js/main.js"></script>-->
   </body>
 </html>
