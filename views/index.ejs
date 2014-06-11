@@ -1,0 +1,398 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.2.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script defer="defer">
+    
+    
+    var size =  getScreenSizeDPI();
+      var stage = new Kinetic.Stage({
+        container: 'container',
+        width: size[0],
+        height: size[1]
+      });
+      
+      
+      
+      var data1;
+      $.ajax({
+    	type: "GET",
+    	url: "http://server-test42.herokuapp.com/resources/11&org1", 
+    	data: {},
+    	dataType: "json",
+    	success: function(msg) {
+	    	setNumbers(msg[0]);
+    	},
+    	error: function(err) {
+        	alert("er: "+err.toString());
+	    	if (err.status == 200) {
+		    	console.log(err);
+	    	}
+	    	else { alert('Error:' + err.responseText + '  Status: ' + err.status); }
+   		 }
+		});
+      
+
+      var layer = new Kinetic.Layer();
+      var background = new Kinetic.Layer();
+      var numberLayer = new Kinetic.Layer();
+   
+      
+
+      
+    var bgcolor = new Kinetic.Rect({
+        x: 0,
+        y: 0,
+        width: size[0],
+        height: size[1],
+        fill: 'black',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var MR = new Kinetic.Rect({
+        x: 0,
+        y: size[1]*(5.25/7.75),
+        width: size[0]*(6/17.5),
+        height: size[1]*(2.5/7.75),
+        fill: '#555555',
+        stroke: '#555555',
+        strokeWidth: 4
+      });
+      
+    var RAP = new Kinetic.Rect({
+        x: size[0]*(11.5/17.5),
+        y: size[1]*(5.25/7.75),
+        width: size[0]*(6/17.5),
+        height: size[1]*(2.5/7.75),
+        fill: '#555555',
+        stroke: '#555555',
+        strokeWidth: 4
+      });
+      
+	var Banner = new Kinetic.Rect({
+        x: 0,
+        y: 0,
+        width: size[0],
+        height: size[1]*(.5/7.75),
+        fill: 'red',
+        stroke: '#red',
+        strokeWidth: 4
+      });
+      
+    var WlcmInfo = new Kinetic.Rect({
+        x: 0,
+        y: size[1]*(.5/7.75),
+        width: size[0]*1/2,
+        height: size[1]*(.5/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+    var Time = new Kinetic.Rect({
+        x: size[0]*1/2,
+        y: size[1]*(.5/7.75),
+        width: size[0]*1/2,
+        height: size[1]*(.5/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+     var WTP = new Kinetic.Rect({
+        x: 0,
+        y: size[1]*(1/7.75),
+        width: size[0]*1.25/7.5,
+        height: size[1]*(.8/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+      var SI = new Kinetic.Rect({
+        x: size[0]*1.25/7.5,
+        y: size[1]*(1/7.75),
+        width: size[0]*1.25/7.5,
+        height: size[1]*(.8/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var EandV = new Kinetic.Rect({
+        x: size[0]*2.5/7.5,
+        y: size[1]*(1/7.75),
+        width: size[0]*1.25/7.5,
+        height: size[1]*(.8/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var BS = new Kinetic.Rect({
+        x: size[0]*3.75/7.5,
+        y: size[1]*(1/7.75),
+        width: size[0]*1.5/7.5,
+        height: size[1]*(1.25/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var PI = new Kinetic.Rect({
+        x: size[0]*5.25/7.5,
+        y: size[1]*(1/7.75),
+        width: size[0]*1.125/7.5,
+        height: size[1]*(.8/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var DM = new Kinetic.Rect({
+        x: size[0]*6.375/7.5,
+        y: size[1]*(1/7.75),
+        width: size[0]*1.125/7.5,
+        height: size[1]*(.8/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var ISC = new Kinetic.Rect({
+        x: 0,
+        y: size[1]*(1.8/7.75),
+        width: size[0]*3.125/7.5,
+        height: size[1]*(1.6/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var filler = new Kinetic.Rect({
+        x: size[0]*3.125/7.5,
+        y: size[1]*(1.8/7.75),
+        width: size[0]*.625/7.5,
+        height: size[1]*(.45/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var KI = new Kinetic.Rect({
+        x: 0,
+        y: size[1]*(3.4/7.75),
+        width: size[0]*1.875/7.5,
+        height: size[1]*(1.8/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var WL = new Kinetic.Rect({
+        x: size[0]*5.25/7.5,
+        y: size[1]*(1.8/7.75),
+        width: size[0]*2.5/7.5,
+        height: size[1]*(1.6/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var IA = new Kinetic.Rect({
+        x: size[0]*3.125/7.5,
+        y: size[1]*(2.25/7.75),
+        width: size[0]*2.25/7.5,
+        height: size[1]*(1.15/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var CR = new Kinetic.Rect({
+        x: size[0]*5.625/7.5,
+        y: size[1]*(3.4/7.75),
+        width: size[0]*1.875/7.5,
+        height: size[1]*(1.8/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var LFP = new Kinetic.Rect({
+        x: size[0]*1.875/7.5,
+        y: size[1]*(3.4/7.75),
+        width: size[0]*3.75/7.5,
+        height: size[1]*(.5/7.75),
+        fill: 'gray',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var PP = new Kinetic.Rect({
+        x: size[0]*1.875/7.5,
+        y: size[1]*(3.9/7.75),
+        width: size[0]*1.875/7.5,
+        height: size[1]*(1.8/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var DR = new Kinetic.Rect({
+        x: size[0]*3.75/7.5,
+        y: size[1]*(3.9/7.75),
+        width: size[0]*1.875/7.5,
+        height: size[1]*(1.8/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var OG = new Kinetic.Rect({
+        x: size[0]*(6.075/17.5),
+        y: size[1]*(5.7/7.75),
+        width: size[0]*(5.35/17.5),
+        height: size[1]*(1.1/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+    var TH = new Kinetic.Rect({
+        x: size[0]*(6.075/17.5),
+        y: size[1]*(6.8/7.75),
+        width: size[0]*(5.35/17.5),
+        height: size[1]*(1.1/7.75),
+        fill: '#555555',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+      
+      function setNumbers(data){
+      
+      	var allText = new Array();
+      
+   		var MRg = new Kinetic.Text({
+  		x: size[0]*1/100,
+  		y: size[1]*(5.7/7.75),
+  		text: data.S14.G,
+  		fontSize: size[0]*2.5/100,
+  		fontFamily: 'Calibri',
+  		fill: 'green'
+		});
+		
+		var WTPg = new Kinetic.Text({
+  		x: size[0]*1/100,
+  		y: size[1]*(.8/7.75)+size[0]*2.5/100,
+  		text: data.S1.G,
+  		fontSize: size[0]*2.5/100,
+  		fontFamily: 'Calibri',
+  		fill: 'green'
+		});
+	
+		var MRr = new Kinetic.Text({
+  			x: (size[0]*(6/17.5)-data.S14.R.toString().length*size[0]*1.75/100),
+  			y: size[1]*(5.7/7.75),
+  			text:data.S14.R,
+  			fontSize: size[0]*2.5/100,
+  			fontFamily: 'Calibri',
+  			fill: 'red'
+		});
+		
+		var WTPr = new Kinetic.Text({
+  			x: size[0]*1.25/7.5-data.S1.R.toString().length*size[0]*1.75/100,
+  			y: size[1]*(.8/7.75)+size[0]*2.5/100,
+  			text: data.S1.R,
+  			fontSize: size[0]*2.5/100,
+  			fontFamily: 'Calibri',
+  			fill: 'red'
+		});
+		
+		allText.push(MRg); 
+		allText.push(MRr);
+		allText.push(WTPg);
+		allText.push(WTPr);
+		displayNumbers(allText);
+	}
+      
+    function getScreenSizeDPI() {    
+    var temp =  document.createElement("div")
+    temp.style.overflow='hidden';
+    temp.style.visibility='hidden';
+    document.body.appendChild(temp)
+    return [screen.width, screen.height];
+	}
+	
+	
+
+    /* var wedge = new Kinetic.Wedge({
+        x: stage.width() / 2,
+        y: stage.height() / 2,
+        radius: 70,
+        angle: 120,
+        fill: 'red',
+        stroke: 'red',
+        strokeWidth: 4,
+        rotation: -120,
+      });*/
+
+      // add the shape to the layer
+      
+      layer.add(MR);
+      layer.add(RAP);
+      layer.add(Banner);
+      layer.add(WlcmInfo);
+      layer.add(Time);
+      layer.add(WTP);
+      layer.add(SI);
+      layer.add(EandV);
+      layer.add(BS);
+      layer.add(PI);
+      layer.add(DM);
+      layer.add(ISC);
+      layer.add(filler);
+      layer.add(KI);
+      layer.add(WL);
+      layer.add(IA);
+      layer.add(CR);
+      layer.add(LFP);
+      layer.add(PP);
+      layer.add(DR);
+      layer.add(OG);
+      layer.add(TH);
+      
+      function displayNumbers(allText){
+		for(var i = 0; i<allText.length;i++){
+      		numberLayer.add(allText[i]);
+      	}
+      	stage.add(background);
+      	stage.add(layer);
+      	stage.add(numberLayer);
+      }
+      
+	  background.add(bgcolor);
+      // add the layer to the stage
+
+      
+
+      
+
+
+
+
+		
+    </script>
+    <!--<script src="js/main.js"></script>-->
+  </body>
+</html>
