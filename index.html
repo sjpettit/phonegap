@@ -35,9 +35,10 @@
 	    	setNumbers(msg[0]);
     	},
     	error: function(err) {
+    	console.log(err);
     		msg = [{_id:null}];
     		setNumbers(msg[0]);
-        	alert("er: "+err.toString());
+        	alert("er: "+err.responseText);
 	    	if (err.status == 200) {
 		    	console.log(err);
 	    	}
@@ -283,15 +284,22 @@
       });
       
       function setNumbers(data){
-      	console.log(data);
+      	
       	if(data._id == null){
       		data = {"_id":"53965d9df0ccd69ac5dd1394","SiteId":"11","Org":"org1","S20":{"G":0,"R":0},"S19":{"G":0,"R":0},"S18":{"G":0,"R":0},"S17":{"G":0,"R":0},"S16":{"G":0,"R":0},"S15":{"G":0,"R":0},"S14":{"G":0,"R":0},"S13":{"G":0,"R":0},"S12":{"G":0,"R":0},"S11":{"G":0,"R":0},"S10":{"G":0,"R":0},"S9":{"G":0,"R":0},"S8":{"G":0,"R":0},"S7":{"G":0,"R":0},"S6":{"G":0,"R":0},"S5":{"G":0,"R":0},"S4":{"G":0,"R":0},"S3":{"G":0,"R":0},"S2":{"G":0,"R":0},"S1":{"G":0,"R":0}};
+      	}
+      	var heightMod;
+      	if(size[0]>size[1]){
+      		heightMod = 2.5;
+      	}
+      	else{
+      		heightMod = 6;
       	}
       	var allText = new Array();
       
    		var MRg = new Kinetic.Text({
   		x: size[0]*1/100,
-  		y: size[1]*(5.7/7.75),
+  		y: size[1]*(5.5/7.75)+size[0]*heightMod/100,
   		text: data.S14.G,
   		fontSize: size[0]*2.5/100,
   		fontFamily: 'Calibri',
@@ -300,16 +308,34 @@
 		
 		var WTPg = new Kinetic.Text({
   		x: size[0]*1/100,
-  		y: size[1]*(.8/7.75)+size[0]*2.5/100,
+  		y: size[1]*(.8/7.75)+size[0]*heightMod/100,
   		text: data.S1.G,
   		fontSize: size[0]*2.5/100,
   		fontFamily: 'Calibri',
   		fill: 'green'
 		});
+		
+		var SIg = new Kinetic.Text({
+  			x: size[0]*1/100+size[0]*1.25/7.5,
+  			y: size[1]*(.8/7.75)+size[0]*heightMod/100,
+  			text: data.S2.G,
+  			fontSize: size[0]*2.5/100,
+  			fontFamily: 'Calibri',
+  			fill: 'green'
+		});
+		
+		var EandVg = new Kinetic.Text({
+  			x: size[0]*1/100+size[0]*2.5/7.5,
+  			y: size[1]*(.8/7.75)+size[0]*heightMod/100,
+  			text: data.S3.G,
+  			fontSize: size[0]*2.5/100,
+  			fontFamily: 'Calibri',
+  			fill: 'green'
+		});
 	
 		var MRr = new Kinetic.Text({
-  			x: (size[0]*(6/17.5)-data.S14.R.toString().length*size[0]*1.75/100),
-  			y: size[1]*(5.7/7.75),
+  			x: (size[0]*(6/17.5)-data.S14.R.toString().length*size[0]*2/100),
+  			y: size[1]*(5.5/7.75)+size[0]*heightMod/100,
   			text:data.S14.R,
   			fontSize: size[0]*2.5/100,
   			fontFamily: 'Calibri',
@@ -317,9 +343,27 @@
 		});
 		
 		var WTPr = new Kinetic.Text({
-  			x: size[0]*1.25/7.5-data.S1.R.toString().length*size[0]*1.75/100,
-  			y: size[1]*(.8/7.75)+size[0]*2.5/100,
+  			x: size[0]*1.25/7.5-data.S1.R.toString().length*size[0]*2/100,
+  			y: size[1]*(.8/7.75)+size[0]*heightMod/100,
   			text: data.S1.R,
+  			fontSize: size[0]*2.5/100,
+  			fontFamily: 'Calibri',
+  			fill: 'red'
+		});
+		
+		var SIr = new Kinetic.Text({
+  			x: size[0]*2.5/7.5-data.S2.R.toString().length*size[0]*2/100,
+  			y: size[1]*(.8/7.75)+size[0]*heightMod/100,
+  			text: data.S2.R,
+  			fontSize: size[0]*2.5/100,
+  			fontFamily: 'Calibri',
+  			fill: 'red'
+		});
+
+		var EandVr = new Kinetic.Text({
+  			x: size[0]*3.75/7.5-data.S3.R.toString().length*size[0]*2/100,
+  			y: size[1]*(.8/7.75)+size[0]*heightMod/100,
+  			text: data.S3.R,
   			fontSize: size[0]*2.5/100,
   			fontFamily: 'Calibri',
   			fill: 'red'
@@ -329,6 +373,10 @@
 		allText.push(MRr);
 		allText.push(WTPg);
 		allText.push(WTPr);
+		allText.push(SIg);
+		allText.push(SIr);
+		allText.push(EandVg);
+		allText.push(EandVr);
 		displayNumbers(allText);
 	}
       
