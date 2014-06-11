@@ -24,16 +24,19 @@
       
       
       
-      var data1;
+      
       $.ajax({
     	type: "GET",
     	url: "http://server-test42.herokuapp.com/resources/11&org1", 
     	data: {},
     	dataType: "json",
     	success: function(msg) {
+    		console.log(msg);
 	    	setNumbers(msg[0]);
     	},
     	error: function(err) {
+    		msg = [{_id:null}];
+    		setNumbers(msg[0]);
         	alert("er: "+err.toString());
 	    	if (err.status == 200) {
 		    	console.log(err);
@@ -280,7 +283,10 @@
       });
       
       function setNumbers(data){
-      
+      	console.log(data);
+      	if(data._id == null){
+      		data = {"_id":"53965d9df0ccd69ac5dd1394","SiteId":"11","Org":"org1","S20":{"G":0,"R":0},"S19":{"G":0,"R":0},"S18":{"G":0,"R":0},"S17":{"G":0,"R":0},"S16":{"G":0,"R":0},"S15":{"G":0,"R":0},"S14":{"G":0,"R":0},"S13":{"G":0,"R":0},"S12":{"G":0,"R":0},"S11":{"G":0,"R":0},"S10":{"G":0,"R":0},"S9":{"G":0,"R":0},"S8":{"G":0,"R":0},"S7":{"G":0,"R":0},"S6":{"G":0,"R":0},"S5":{"G":0,"R":0},"S4":{"G":0,"R":0},"S3":{"G":0,"R":0},"S2":{"G":0,"R":0},"S1":{"G":0,"R":0}};
+      	}
       	var allText = new Array();
       
    		var MRg = new Kinetic.Text({
@@ -373,6 +379,7 @@
       layer.add(TH);
       
       function displayNumbers(allText){
+      	
 		for(var i = 0; i<allText.length;i++){
       		numberLayer.add(allText[i]);
       	}
